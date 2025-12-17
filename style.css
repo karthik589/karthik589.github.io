@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 :root {
     --xbox-green: #39b54a;
     /* Classic bright green */
@@ -483,5 +482,4 @@ body {
         border-top: 1px solid var(--xbox-green);
         z-index: 100;
     }
-
 }

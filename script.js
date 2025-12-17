@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Resume Data from User
 const resumeData = {
     memory: {
@@ -303,4 +302,3 @@ function animateParticles() {
 
 resize();
 animateParticles();
-
