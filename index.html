@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karthik Chandra - Xbox Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="crt-overlay"></div>
+    <div id="boot-screen" class="screen active">
+        <div class="xbox-logo-container">
+            <div class="x-logo">
+                <div class="blob"></div>
+                <div class="blob"></div>
+                <div class="blob"></div>
+                <div class="blob"></div>
+            </div>
+            <h1 class="boot-text">RESUME</h1>
+            <p class="microsoft-text">KARTHIK CHANDRA</p>
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="screen hidden">
+        <div class="background-orb"></div>
+        
+        <header class="top-bar">
+            <span class="console-name">KARTHIK'S XBOX</span>
+            <span class="time" id="clock">12:00 PM</span>
+        </header>
+
+        <div class="main-interface">
+            <div class="orb-container">
+                <canvas id="orb-canvas"></canvas>
+            </div>
+
+            <nav class="menu-list">
+                <div class="menu-item active" data-target="memory">
+                    <span class="menu-text">MEMORY</span>
+                    <span class="sub-text">Experience</span>
+                </div>
+                <div class="menu-item" data-target="music">
+                    <span class="menu-text">MUSIC</span>
+                    <span class="sub-text">Projects</span>
+                </div>
+                <div class="menu-item" data-target="settings">
+                    <span class="menu-text">SETTINGS</span>
+                    <span class="sub-text">Skills</span>
+                </div>
+                <div class="menu-item" data-target="xbox-live">
+                    <span class="menu-text">XBOX LIVE</span>
+                    <span class="sub-text">Contact & Info</span>
+                </div>
+            </nav>
+
+            <div class="content-panel" id="content-display">
+                <!-- Dynamic Content injected here -->
+                <div class="panel-header">
+                    <h2 id="panel-title">SELECT OPTION</h2>
+                </div>
+                <div class="panel-body" id="panel-body">
+                    <p>Welcome to the dashboard.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-controls">
+            <div class="control">
+                <span class="btn-a">A</span> Select
+            </div>
+            <div class="control">
+                <span class="btn-b">B</span> Back
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
