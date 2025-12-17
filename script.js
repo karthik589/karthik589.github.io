@@ -135,38 +135,79 @@ const menuItems = document.querySelectorAll('.menu-item');
 const contentPanelTitle = document.getElementById('panel-title');
 const contentPanelBody = document.getElementById('panel-body');
 const clockElement = document.getElementById('clock');
-const clickSound = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU'); // Placeholder for sound (empty)
+// Sound Effects
+const startupSound = new Audio('sounds/xbox-360-start-up.mp3');
+const hoverSound = new Audio('sounds/xbox-one-sound.mp3');
+const linkedinSound = new Audio('sounds/xbox-guy-god-dammit.mp3');
+
+// Volume adjustments
+hoverSound.volume = 0.5;
 
 // Boot Sequence
+// Wait for interaction to play sound
+const startScreen = document.getElementById('start-screen');
+
 window.onload = () => {
-    setTimeout(() => {
-        bootScreen.style.opacity = '0';
+    // We do NOT play sound automatically anymore.
+    // We wait for user to click "Press Start"
+
+    startScreen.addEventListener('click', () => {
+        startScreen.style.display = 'none'; // Hide start screen immediately
+
+        // Now valid to play sound
+        startupSound.play().catch(e => console.log("Audio play failed:", e));
+
+        // Start Boot Animation
         setTimeout(() => {
-            bootScreen.classList.add('hidden');
-            dashboardScreen.classList.remove('hidden');
-            // Slight delay for dashboard fade in
+            bootScreen.style.opacity = '0';
             setTimeout(() => {
-                dashboardScreen.style.opacity = '1';
-                dashboardScreen.style.display = 'flex';
-                // Load initial content
-                loadContent('memory');
-            }, 100);
-        }, 1000);
-    }, 4500); // 4.5s boot time
+                bootScreen.classList.add('hidden');
+                dashboardScreen.classList.remove('hidden');
+
+                // Slight delay for dashboard fade in
+                setTimeout(() => {
+                    dashboardScreen.style.opacity = '1';
+                    dashboardScreen.style.display = 'flex';
+                    // Load initial content
+                    loadContent('memory');
+                }, 100);
+            }, 1000);
+        }, 4500); // 4.5s boot time sync with sound
+    });
 };
 
 // Menu Navigation
 menuItems.forEach(item => {
     item.addEventListener('mouseenter', () => {
-        // playSound();
         resetActiveInfo();
         item.classList.add('active');
     });
 
     item.addEventListener('click', () => {
+        // Play sound on click
+        hoverSound.currentTime = 0;
+        hoverSound.play().catch(() => { });
+
         const target = item.dataset.target;
         loadContent(target);
     });
+});
+
+// Event Delegation for Dynamic Content (LinkedIn audio)
+document.addEventListener('click', (e) => {
+    // Check if the clicked element is the LinkedIn link
+    const link = e.target.closest('a[href*="linkedin.com"]');
+    if (link) {
+        e.preventDefault(); // Stop immediate navigation
+        const targetUrl = link.href;
+
+        linkedinSound.play().catch(err => console.error("Sound error:", err));
+
+        // Wait for sound to play before navigating
+        setTimeout(() => {
+            window.open(targetUrl, '_blank'); // Open in new tab preferred for external links
+        }, 1500);
+    }
 });
 
 function resetActiveInfo() {
